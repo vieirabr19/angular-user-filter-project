@@ -1,0 +1,10 @@
+.user__list {
+  tr {
+    &:hover,
+    &:focus,
+    &:active {
+      cursor: pointer;
+      background-color: #eee;
+    }
+  }
+}

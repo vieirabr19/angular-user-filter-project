@@ -1,0 +1,12 @@
+.container {
+  max-width: 1280px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 30px;
+
+  &__filter {
+    display: flex;
+    flex-direction: column;
+  }
+}
