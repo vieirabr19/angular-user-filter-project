@@ -4,11 +4,14 @@
       <app-filter />
     </div>
     <div class="list">
-      <app-user-list (selectedUserist)="selectedUserist($event)" />
+      <app-user-list
+        (userSelected)="onUserSelected($event)"
+        [userList]="userList"
+      />
     </div>
   </div>
 
-  <div class="aside">
+  <div class="aside" *ngIf="showUserDetails">
     <app-user-details [user]="userSelected" />
   </div>
 </div>

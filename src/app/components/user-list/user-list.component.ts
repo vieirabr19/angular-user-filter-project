@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { UsersList } from '../../data/users-list';
 import { IUser } from '../../interfaces/user/user.interface';
 
 @Component({
@@ -10,12 +9,11 @@ import { IUser } from '../../interfaces/user/user.interface';
 })
 export class UserListComponent {
   displayedColumns: string[] = ['name', 'date', 'status'];
-  userList: IUser[] = UsersList;
+  @Input({ required: true }) userList: IUser[] = [];
 
-  @Output() selectedUserist = new EventEmitter<IUser>();
+  @Output('userSelected') userSelectedEmitt = new EventEmitter<IUser>();
 
   onUserSelected(user: IUser) {
-    console.log(user);
-    this.selectedUserist.emit(user);
+    this.userSelectedEmitt.emit(user);
   }
 }
