@@ -6,7 +6,7 @@
         <input
           matInput
           placeholder="Ex. Fulano da Silva"
-          [(ngModel)]="filterOption.name"
+          [(ngModel)]="filterOptions.name"
         />
       </mat-form-field>
     </div>
@@ -18,12 +18,12 @@
           <input
             matStartDate
             placeholder="Data início"
-            [(ngModel)]="filterOption.startDate"
+            [(ngModel)]="filterOptions.startDate"
           />
           <input
             matEndDate
             placeholder="Data final"
-            [(ngModel)]="filterOption.endDate"
+            [(ngModel)]="filterOptions.endDate"
           />
         </mat-date-range-input>
         <mat-datepicker-toggle
@@ -37,7 +37,7 @@
     <div class="filter__status">
       <mat-form-field>
         <mat-label>Status</mat-label>
-        <mat-select [(ngModel)]="filterOption.status">
+        <mat-select [(ngModel)]="filterOptions.status">
           <mat-option *ngFor="let status of statusList" [value]="status.value">
             {{ status.description }}
           </mat-option>
@@ -46,7 +46,7 @@
     </div>
 
     <div class="filter__button">
-      <button mat-raised-button color="primary" (click)="onFilterSelected()">
+      <button mat-raised-button color="primary" (click)="onFilter()">
         Filtrar
       </button>
     </div>
