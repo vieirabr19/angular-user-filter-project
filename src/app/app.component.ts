@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { endOfDay, isWithinInterval } from 'date-fns';
 import { UsersList } from './data/users-list';
 import { IFilterOptions } from './interfaces/filter-options.interface';
 import { IUser } from './interfaces/user/user.interface';
@@ -34,22 +35,50 @@ export class AppComponent implements OnInit {
   filterUsersList(filterOptions: IFilterOptions, userList: IUser[]): IUser[] {
     let filteredList: IUser[] = [];
 
-    filteredList = this.filterUserListByName(filterOptions.name, userList);
-    filteredList = this.filterUserListByStatus(
+    filteredList = this.filterUsersListByName(filterOptions.name, userList);
+
+    filteredList = this.filterUsersListByStatus(
       filterOptions.status,
+      filteredList
+    );
+
+    filteredList = this.filterUsersListByDate(
+      filterOptions.startDate,
+      filterOptions.endDate,
       filteredList
     );
 
     return filteredList;
   }
 
-  filterUserListByStatus(
+  filterUsersListByDate(
+    startDate: Date | undefined,
+    endDate: Date | undefined,
+    userList: IUser[]
+  ): IUser[] {
+    const DATES_NOT_TYPPE = startDate === undefined || endDate === undefined;
+
+    if (DATES_NOT_TYPPE) {
+      return userList;
+    }
+
+    const filteredList = userList.filter((user) =>
+      isWithinInterval(new Date(user.dataCadastro), {
+        start: startDate,
+        end: endOfDay(endDate),
+      })
+    );
+
+    return filteredList;
+  }
+
+  filterUsersListByStatus(
     status: boolean | undefined,
     userList: IUser[]
   ): IUser[] {
-    const STATUS_NOT_TYPPED = status === undefined;
+    const STATUS_NOT_TYPPE = status === undefined;
 
-    if (STATUS_NOT_TYPPED) {
+    if (STATUS_NOT_TYPPE) {
       return userList;
     }
 
@@ -58,10 +87,10 @@ export class AppComponent implements OnInit {
     return filteredList;
   }
 
-  filterUserListByName(name: string | undefined, userList: IUser[]): IUser[] {
-    const NAME_NOT_TYPPED = name === undefined;
+  filterUsersListByName(name: string | undefined, userList: IUser[]): IUser[] {
+    const NAME_NOT_TYPPE = name === undefined;
 
-    if (NAME_NOT_TYPPED) {
+    if (NAME_NOT_TYPPE) {
       return userList;
     }
 

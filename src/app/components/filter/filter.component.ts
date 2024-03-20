@@ -8,10 +8,10 @@ import { IFilterOptions } from '../../interfaces/filter-options.interface';
   styleUrl: './filter.component.scss',
 })
 export class FilterComponent {
-  @Output('onFilter') onFilterEmitter = new EventEmitter();
+  @Output('onFilter') onFilterEmiit = new EventEmitter();
 
   statusList = [
-    { description: 'Selecione', value: undefined },
+    { description: 'Todos', value: undefined },
     { description: 'Ativo', value: true },
     { description: 'Inátivo', value: false },
   ];
@@ -24,6 +24,6 @@ export class FilterComponent {
   };
 
   onFilter() {
-    this.onFilterEmitter.emit(this.filterOptions);
+    this.onFilterEmiit.emit(this.filterOptions);
   }
 }
